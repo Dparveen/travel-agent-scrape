@@ -1,0 +1,41 @@
+[
+  {
+    "id": "nidhi-ta",
+    "name": "NIDHI+ Travel Agents",
+    "enabled": true,
+    "type": "nidhi",
+    "category": "Travel Agent",
+    "startUrl": "https://nidhi.tourism.gov.in/home/directory?categoryCode=02&subcategory=TA",
+    "pagination": {
+      "type": "query",
+      "param": "pageno",
+      "start": 1,
+      "maxPages": 1000
+    }
+  },
+  {
+    "id": "nidhi-ota",
+    "name": "NIDHI+ Online Travel Aggregators",
+    "enabled": true,
+    "type": "nidhi",
+    "category": "Online Travel Aggregator",
+    "startUrl": "https://nidhi.tourism.gov.in/home/directory?categoryCode=04&category_name=Online%20Travel%20Aggregator",
+    "pagination": {
+      "type": "query",
+      "param": "pageno",
+      "start": 1,
+      "maxPages": 1000
+    }
+  },
+  {
+    "id": "delhi-tourism",
+    "name": "Delhi Tourism - Registered Tour Operators",
+    "enabled": false,
+    "type": "generic",
+    "category": "Tour Operator",
+    "startUrl": "https://tourism.delhi.gov.in/tourism/list-registered-tour-operators",
+    "pagination": {
+      "type": "none"
+    }
+  }
+]

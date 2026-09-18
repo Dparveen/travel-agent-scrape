@@ -1,0 +1,6 @@
+
+const ExcelJS=require("exceljs"),fs=require("fs"),path=require("path");
+const cols=[["Sr No","sr",10],["Agency Name","agency_name",42],["Email","email",38],["Phone","phone",18],["Website","website",42],["Address","address",65],["City","city",22],["District","district",24],["State","state",24],["Pincode","pincode",12],["Category","category",30],["Source","source",34],["Source URL","source_url",70],["Page","page",10]];
+function add(wb,name,rows){const ws=wb.addWorksheet(name);ws.columns=cols.map(([header,key,width])=>({header,key,width}));rows.forEach((r,i)=>ws.addRow({sr:i+1,...r}));ws.freezePanes="A2";ws.autoFilter="A1:N1";ws.getRow(1).font={bold:true};ws.eachRow(r=>r.eachCell(c=>c.alignment={vertical:"top",wrapText:true}));}
+async function exportExcel(rows,file){const wb=new ExcelJS.Workbook();add(wb,"All Data",rows);for(const cat of [...new Set(rows.map(r=>r.category))])add(wb,cat.slice(0,31),rows.filter(r=>r.category===cat));const s=wb.addWorksheet("Summary");s.columns=[{header:"Category",key:"c",width:35},{header:"Records",key:"n",width:15}];for(const c of [...new Set(rows.map(r=>r.category))])s.addRow({c,n:rows.filter(r=>r.category===c).length});s.addRow({c:"TOTAL",n:rows.length});fs.mkdirSync(path.dirname(file),{recursive:true});await wb.xlsx.writeFile(file);return file}
+module.exports={exportExcel};
